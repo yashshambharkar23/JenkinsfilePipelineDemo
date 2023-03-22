@@ -30,12 +30,13 @@ pipeline {
         stage('Release') {
             steps {
                 echo 'Released'
+                - uses: aliencube/microsoft-teams-actions@v0.8.0
+                    with:
+                        webhook_uri: ${{ secrets.MICROSOFT_TEAMS_WEBHOOK_URI }}
+                        title: This is a custom message
+                        summary: This is a message summary
             }
         }
-        - uses: aliencube/microsoft-teams-actions@v0.8.0
-      with:
-        webhook_uri: ${{ secrets.MICROSOFT_TEAMS_WEBHOOK_URI }}
-        title: This is a custom message
-        summary: This is a message summary
+        
     }
 }
