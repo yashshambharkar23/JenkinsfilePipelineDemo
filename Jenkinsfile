@@ -29,7 +29,7 @@ pipeline {
         }
         stage('Release') {
             steps {
-                office365ConnectorSend message: "The  build is available at 4${env.BUILD_NUMBER} \n\n  ", status:"Success", webhookUrl:"${jenkins_webhook}"   
+                office365ConnectorSend message: "The  build is available at ${env.BUILD_NUMBER} \n\n  ", status:"Success", webhookUrl:"${jenkins_webhook}"   
             }
         }
     }
