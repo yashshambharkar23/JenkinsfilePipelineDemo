@@ -29,14 +29,9 @@ pipeline {
         }
         stage('Release') {
             steps {
-                script
-                {
-                    if(currentBuild.result=="SUCCESS")
-                    {
-                        branchName = branchName.replace("/","\\")
-						office365ConnectorSend message: "The ${AGENT} build is available at ${branchName}\\${env.Version}.${env.BUILD_NUMBER} \n\n  ", status:"Success", webhookUrl:"${jenkins_webhook}"
-                    }
-                }          
+                office365ConnectorSend webhookUrl: "${jenkins_webhook}",
+                message: 'Code is deployed',
+                status: 'Success'        
             }
         }
     }
