@@ -34,7 +34,7 @@ pipeline {
                     if(currentBuild.result=="SUCCESS")
                     {
                         branchName = branchName.replace("/","\\")
-						office365ConnectorSend message: "The ${params.AGENT} build is available at \\\\\\192.168.34.17\\shares\\S3_builds\\Electron\\Server\\${branchName}\\${env.Version}.${env.BUILD_NUMBER} \n\n  ", status:"Success", webhookUrl:"${jenkins_webhook}"
+						office365ConnectorSend message: "The ${AGENT} build is available at ${branchName}\\${env.Version}.${env.BUILD_NUMBER} \n\n  ", status:"Success", webhookUrl:"${jenkins_webhook}"
                     }
                 }          
             }
