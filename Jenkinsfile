@@ -29,9 +29,7 @@ pipeline {
         }
         stage('Release') {
             steps {
-                office365ConnectorSend webhookUrl: "${jenkins_webhook}",
-                message: 'Code is deployed',
-                status: 'Success'        
+                office365ConnectorSend message: "The  build is available at ${branchName}\\${env.BUILD_NUMBER} \n\n  ", status:"Success", webhookUrl:"${jenkins_webhook}"   
             }
         }
     }
