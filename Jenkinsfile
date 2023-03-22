@@ -29,14 +29,15 @@ pipeline {
         }
         stage('Release') {
             steps {
-                echo 'Released'
-                - uses: aliencube/microsoft-teams-actions@v0.8.0
-                    with:
-                        webhook_uri: ${{ secrets.MICROSOFT_TEAMS_WEBHOOK_URI }}
-                        title: This is a custom message
-                        summary: This is a message summary
+                script
+                {
+                    if(currentBuild.result=="SUCCESS")
+                    {
+                        branchName = branchName.replace("/","\\")
+						office365ConnectorSend message: "The ${params.AGENT} build is available at \\\\\\192.168.34.17\\shares\\S3_builds\\Electron\\Server\\${branchName}\\${env.Version}.${env.BUILD_NUMBER} \n\n  ", status:"Success", webhookUrl:"${jenkins_webhook}"
+                    }
+                }          
             }
         }
-        
     }
 }
